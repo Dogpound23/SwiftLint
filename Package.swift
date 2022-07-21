@@ -32,7 +32,7 @@ let package = Package(
         .library(name: "SwiftLintFramework", targets: ["SwiftLintFramework"])
     ],
     dependencies: [
-        .package(name: "swift-argument-parser", url: "https://github.com/apple/swift-argument-parser.git", .upToNextMinor(from: "1.0.3")),
+        .package(name: "swift-argument-parser", url: "https://github.com/apple/swift-argument-parser.git", .upToNextMinor(from: "1.1.3")),
         .package(name: "SwiftSyntax", url: "https://github.com/apple/swift-syntax.git",
                  .exact(swiftSyntaxFiveDotSix ? "0.50600.1" : "0.50500.0")),
         .package(url: "https://github.com/jpsim/SourceKitten.git", from: "0.32.0"),
