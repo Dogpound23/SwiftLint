@@ -2,10 +2,8 @@
 import PackageDescription
 
 #if os(macOS)
-private let addCryptoSwift = false
 private let staticSwiftSyntax = true
 #else
-private let addCryptoSwift = true
 private let staticSwiftSyntax = false
 #endif
 
@@ -16,17 +14,17 @@ private let swiftSyntaxFiveDotSix = true
 #endif
 
 let frameworkDependencies: [Target.Dependency] = [
+    "CryptoSwift",
     .product(name: "SourceKittenFramework", package: "SourceKitten"),
     .product(name: "SwiftSyntax", package: "SwiftSyntax"),
     "Yams",
 ]
-+ (addCryptoSwift ? ["CryptoSwift"] : [])
 + (staticSwiftSyntax ? ["lib_InternalSwiftSyntaxParser"] : [])
 + (swiftSyntaxFiveDotSix ? [.product(name: "SwiftSyntaxParser", package: "SwiftSyntax")] : [])
 
 let package = Package(
     name: "SwiftLint",
-    platforms: [.macOS(.v10_12)],
+    platforms: [.macOS(.v12)],
     products: [
         .executable(name: "swiftlint", targets: ["swiftlint"]),
         .library(name: "SwiftLintFramework", targets: ["SwiftLintFramework"])
@@ -37,8 +35,9 @@ let package = Package(
                  .exact(swiftSyntaxFiveDotSix ? "0.50600.1" : "0.50500.0")),
         .package(url: "https://github.com/jpsim/SourceKitten.git", from: "0.32.0"),
         .package(url: "https://github.com/jpsim/Yams.git", from: "4.0.2"),
+        .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", .upToNextMinor(from: "1.5.1")),
         .package(url: "https://github.com/scottrhoyt/SwiftyTextTable.git", from: "0.9.0"),
-    ] + (addCryptoSwift ? [.package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", .upToNextMinor(from: "1.5.1"))] : []),
+    ],
     targets: [
         .executableTarget(
             name: "swiftlint",
