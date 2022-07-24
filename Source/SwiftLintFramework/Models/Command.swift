@@ -1,14 +1,6 @@
 import Foundation
 import SourceKittenFramework
 
-#if os(Linux)
-private extension Scanner {
-    func scanString(_ string: String) -> String? {
-        return scanString(string)
-    }
-}
-#endif
-
 /// A SwiftLint-interpretable command to modify SwiftLint's behavior embedded as comments in source code.
 public struct Command: Equatable {
     /// The action (verb) that SwiftLint should perform when interpreting this command.
